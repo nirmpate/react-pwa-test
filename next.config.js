@@ -1,16 +1,13 @@
 const withTM = require("next-transpile-modules")([
-	"@pusher/push-notifications-web",
+  "@pusher/push-notifications-web",
 ]); // pass the modules you would like to see transpiled
 
-module.exports = withTM();
+const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
 
-
-const withPWA = require('next-pwa')
-const runtimeCaching = require('next-pwa/cache')
-
-module.exports = withPWA({
+module.exports = withTM(withPWA({
   pwa: {
-    dest: 'public',
+    dest: "public",
     runtimeCaching,
   },
-})
+}));
