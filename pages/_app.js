@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     window.navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
       const beamsClient = new PusherPushNotifications.Client({
-        instanceId: 'e936aba9-8dc9-4365-9af6-1d5d4527a3a5',
+        instanceId: '2eb57a6c-be2b-4c05-9d56-db89a773285a',
         serviceWorkerRegistration: serviceWorkerRegistration,
       })
       beamsClient.start()

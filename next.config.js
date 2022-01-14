@@ -9,5 +9,6 @@ module.exports = withTM(withPWA({
   pwa: {
     dest: "public",
     runtimeCaching,
+    importScripts: ['https://js.pusher.com/beams/service-worker.js']
   },
 }));
