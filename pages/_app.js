@@ -4,6 +4,23 @@ import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/service-worker.js').then(
+          function (registration) {
+            console.log(
+              'Service Worker registration successful with scope: ',
+              registration.scope,
+            );
+          },
+          function (err) {
+            console.log('Service Worker registration failed: ', err);
+          },
+        );
+      });
+    }
+  }, []);
+  useEffect(() => {
     window.navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
       const beamsClient = new PusherPushNotifications.Client({
         instanceId: "2eb57a6c-be2b-4c05-9d56-db89a773285a",
@@ -15,6 +32,7 @@ export default function App({ Component, pageProps }) {
           .addEventListener("click", function () {
             beamsClient
               .start()
+              .then(() => beamsClient.addDeviceInterest('hello'))
               .then(() => {
                 console.log("Successfully started beams client");
               })
